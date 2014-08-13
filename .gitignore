@@ -1,2 +1,2 @@
 target/
-test-token.properties
+src/test/resources/test-token.properties
