@@ -12,6 +12,7 @@ import com.sensedia.transparencia.client.resources.Excelencia;
 import com.sensedia.transparencia.client.resources.Partido;
 import com.sensedia.transparencia.client.rest.APIRequest;
 import java.util.List;
+import org.apache.commons.lang3.ObjectUtils;
 
 /**
  *
@@ -47,28 +48,28 @@ public class TransparenciaClient {
         return request.getPartidos();
     }
 
-    public List<Candidato> getCandidatos(String estado, String partido, String nome, String cargo, CANDIDATO_EAGER_FETCH... fetch)
+    public List<Candidato> getCandidatos(String estado, String partido, String nome, String cargo)
             throws RestException {
 
         return request.getCandidatos(estado, partido, nome, cargo, DEFAULT_LIMIT, DEFAULT_OFFSET);
 
     }
 
-    public List<Candidato> getCandidatosByPartido(String estado, String partido, CANDIDATO_EAGER_FETCH... fetch)
+    public List<Candidato> getCandidatosByPartido(String estado, String partido)
             throws RestException {
 
         return request.getCandidatos(estado, partido, "", "", DEFAULT_LIMIT, DEFAULT_OFFSET);
 
     }
 
-    public List<Candidato> getCandidatosByCargo(String estado, String cargo, CANDIDATO_EAGER_FETCH... fetch)
+    public List<Candidato> getCandidatosByCargo(String estado, String cargo)
             throws RestException {
 
         return request.getCandidatos(estado, "", "", cargo, DEFAULT_LIMIT, DEFAULT_OFFSET);
 
     }
 
-    public List<Candidato> getCandidatosByNome(String estado, String nome, CANDIDATO_EAGER_FETCH... fetch)
+    public List<Candidato> getCandidatosByNome(String estado, String nome)
             throws RestException {
 
         return request.getCandidatos(estado, "", nome, "", DEFAULT_LIMIT, DEFAULT_OFFSET);
@@ -82,15 +83,28 @@ public class TransparenciaClient {
 
     }
 
-    public Candidato getCandidatoById(String candidatoId) throws RestException {
-        return request.getCandidatoById(candidatoId);
+    public Candidato getCandidatoById(String candidatoId, boolean fetchSubResources) throws RestException {
+        candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
+
+        Candidato foundCandidato = request.getCandidatoById(candidatoId);
+        if (fetchSubResources) {
+            foundCandidato.setBens(request.getCandidatoBens(candidatoId));
+            foundCandidato.setCandidaturas(request.getCandidatoCandidaturas(candidatoId));
+            foundCandidato.setEstatisticas(request.getCandidatoEstatisticas(candidatoId));
+            foundCandidato.setDoadores(request.getCandidatoDoadores(candidatoId, ""));
+        }
+        return foundCandidato;
     }
 
     public List<Bens> getCandidatoBens(String candidatoId) throws RestException {
+        candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
+
         return request.getCandidatoBens(candidatoId);
     }
 
     public List<Doador> getCandidatoDoadores(String candidatoId, String anoEleitoral) throws RestException {
+
+        candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
         return request.getCandidatoDoadores(candidatoId, anoEleitoral);
     }
 
@@ -99,14 +113,19 @@ public class TransparenciaClient {
     }
 
     public List<Candidatura> getCandidatoCandidaturas(String candidatoId) throws RestException {
+
+        candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
         return request.getCandidatoCandidaturas(candidatoId);
     }
 
     public List<Estatistica> getCandidatoEstatisticas(String candidatoId) throws RestException {
+        candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
+
         return request.getCandidatoEstatisticas(candidatoId);
     }
 
     public List<Excelencia> getExcelencias(String casa, String nome, String estadoId, String partidoId) throws RestException {
+
         return request.getExcelencias(casa, nome, estadoId, partidoId);
     }
 
@@ -115,6 +134,8 @@ public class TransparenciaClient {
     }
 
     public List<Bens> getExcelenciaBens(String excelenciaId) throws RestException {
+        excelenciaId = ObjectUtils.defaultIfNull(excelenciaId, "null");
+
         return request.getCandidatoBens(excelenciaId);
     }
 

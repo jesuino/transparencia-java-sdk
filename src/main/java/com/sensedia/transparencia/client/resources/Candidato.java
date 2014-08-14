@@ -44,204 +44,120 @@ public class Candidato {
     private List<Candidatura> candidaturas = new ArrayList<>();
     private List<Estatistica> estatisticas = new ArrayList<>();
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getApelido() {
-        return apelido;
-    }
-
-    public void setApelido(String apelido) {
-        this.apelido = apelido;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
-    }
-
-    public String getMiniBio() {
-        return miniBio;
-    }
-
-    public void setMiniBio(String miniBio) {
-        this.miniBio = miniBio;
-    }
-
-    public String getCargos() {
-        return cargos;
-    }
-
-    public void setCargos(String cargos) {
-        this.cargos = cargos;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public String getPartido() {
-        return partido;
-    }
-
-    public void setPartido(String partido) {
-        this.partido = partido;
-    }
-
-    public String getIdade() {
-        return idade;
-    }
-
-    public void setIdade(String idade) {
-        this.idade = idade;
-    }
-
-    public String getCasaAtual() {
-        return casaAtual;
-    }
-
-    public void setCasaAtual(String casaAtual) {
-        this.casaAtual = casaAtual;
-    }
-
-    public String getInstrucao() {
-        return instrucao;
-    }
-
-    public void setInstrucao(String instrucao) {
-        this.instrucao = instrucao;
-    }
-
-    public String getOcupacao() {
-        return ocupacao;
-    }
-
-    public void setOcupacao(String ocupacao) {
-        this.ocupacao = ocupacao;
-    }
-
-    public String getPrevisao() {
-        return previsao;
-    }
-
-    public void setPrevisao(String previsao) {
-        this.previsao = previsao;
-    }
-
-    public String getBancadas() {
-        return bancadas;
-    }
-
-    public void setBancadas(String bancadas) {
-        this.bancadas = bancadas;
-    }
-
-    public String getProcessos() {
-        return processos;
-    }
-
-    public void setProcessos(String processos) {
-        this.processos = processos;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public Boolean getReeleicao() {
-        return reeleicao;
-    }
-
-    public void setReeleicao(Boolean reeleicao) {
-        this.reeleicao = reeleicao;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public List<Bens> getBens() {
-        return bens;
-    }
-
     public void setBens(List<Bens> bens) {
         this.bens = bens;
-    }
-
-    public List<Doador> getDoadores() {
-        return doadores;
     }
 
     public void setDoadores(List<Doador> doadores) {
         this.doadores = doadores;
     }
 
-    public List<Candidatura> getCandidaturas() {
-        return candidaturas;
-    }
-
     public void setCandidaturas(List<Candidatura> candidaturas) {
         this.candidaturas = candidaturas;
     }
 
-    public List<Estatistica> getEstatisticas() {
-        return estatisticas;
-    }
-
     public void setEstatisticas(List<Estatistica> estatisticas) {
         this.estatisticas = estatisticas;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getApelido() {
+        return apelido;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public String getMiniBio() {
+        return miniBio;
+    }
+
+    public String getCargos() {
+        return cargos;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public String getPartido() {
+        return partido;
+    }
+
+    public String getIdade() {
+        return idade;
+    }
+
+    public String getCasaAtual() {
+        return casaAtual;
+    }
+
+    public String getInstrucao() {
+        return instrucao;
+    }
+
+    public String getOcupacao() {
+        return ocupacao;
+    }
+
+    public String getPrevisao() {
+        return previsao;
+    }
+
+    public String getBancadas() {
+        return bancadas;
+    }
+
+    public String getProcessos() {
+        return processos;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public Boolean getReeleicao() {
+        return reeleicao;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public List<Bens> getBens() {
+        return bens;
+    }
+
+    public List<Doador> getDoadores() {
+        return doadores;
+    }
+
+    public List<Candidatura> getCandidaturas() {
+        return candidaturas;
+    }
+
+    public List<Estatistica> getEstatisticas() {
+        return estatisticas;
     }
 
     @Override
