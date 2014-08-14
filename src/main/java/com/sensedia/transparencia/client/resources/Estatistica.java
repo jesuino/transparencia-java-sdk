@@ -16,7 +16,7 @@ public class Estatistica {
     private String faltasPlenario;
     private String mediaPlenario;
     private String faltasComissoes;
-    private String mediaCommissoes;
+    private String mediaComissoes;
     private String evolucao;
     private String anoRef;
     private String emendas;
@@ -46,12 +46,12 @@ public class Estatistica {
         this.faltasComissoes = faltasComissoes;
     }
 
-    public String getMediaCommissoes() {
-        return mediaCommissoes;
+    public String getMediaComissoes() {
+        return mediaComissoes;
     }
 
-    public void setMediaCommissoes(String mediaCommissoes) {
-        this.mediaCommissoes = mediaCommissoes;
+    public void setMediaComissoes(String mediaCommissoes) {
+        this.mediaComissoes = mediaCommissoes;
     }
 
     public String getEvolucao() {
@@ -92,7 +92,7 @@ public class Estatistica {
         hash = 67 * hash + Objects.hashCode(this.faltasPlenario);
         hash = 67 * hash + Objects.hashCode(this.mediaPlenario);
         hash = 67 * hash + Objects.hashCode(this.faltasComissoes);
-        hash = 67 * hash + Objects.hashCode(this.mediaCommissoes);
+        hash = 67 * hash + Objects.hashCode(this.mediaComissoes);
         hash = 67 * hash + Objects.hashCode(this.evolucao);
         hash = 67 * hash + Objects.hashCode(this.anoRef);
         hash = 67 * hash + Objects.hashCode(this.emendas);
@@ -118,7 +118,7 @@ public class Estatistica {
         if (!Objects.equals(this.faltasComissoes, other.faltasComissoes)) {
             return false;
         }
-        if (!Objects.equals(this.mediaCommissoes, other.mediaCommissoes)) {
+        if (!Objects.equals(this.mediaComissoes, other.mediaComissoes)) {
             return false;
         }
         if (!Objects.equals(this.evolucao, other.evolucao)) {
