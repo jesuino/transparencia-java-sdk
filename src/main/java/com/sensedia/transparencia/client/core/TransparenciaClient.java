@@ -18,7 +18,7 @@ import org.apache.commons.lang3.ObjectUtils;
  *
  * @author Josue
  */
-public class TransparenciaClient {
+public class TransparenciaClient implements NewInterface {
 
     public static final int MAX_LIMIT = 20;
     private static final int DEFAULT_LIMIT = 20;
@@ -30,14 +30,17 @@ public class TransparenciaClient {
         request = new APIRequest(token);
     }
 
+    @Override
     public List<Estado> getEstados() throws RestException {
         return request.getEstados();
     }
 
+    @Override
     public List<Partido> getPartidos() throws RestException {
         return request.getPartidos();
     }
 
+    @Override
     public List<Candidato> getCandidatos(String estado, String partido, String nome, String cargo, int limit, int offset)
             throws RestException {
 
@@ -50,6 +53,7 @@ public class TransparenciaClient {
 
     }
 
+    @Override
     public List<Candidato> getCandidatos(String estado, String partido, String nome, String cargo)
             throws RestException {
 
@@ -62,6 +66,7 @@ public class TransparenciaClient {
 
     }
 
+    @Override
     public List<Candidato> getCandidatosByPartido(String estado, String partido)
             throws RestException {
 
@@ -72,6 +77,7 @@ public class TransparenciaClient {
 
     }
 
+    @Override
     public List<Candidato> getCandidatosByCargo(String estado, String cargo)
             throws RestException {
 
@@ -82,6 +88,7 @@ public class TransparenciaClient {
 
     }
 
+    @Override
     public List<Candidato> getCandidatosByNome(String estado, String nome)
             throws RestException {
 
@@ -92,6 +99,7 @@ public class TransparenciaClient {
 
     }
 
+    @Override
     public Candidato getCandidatoById(String candidatoId, boolean fetchSubResources) throws RestException {
         candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
 
@@ -105,39 +113,46 @@ public class TransparenciaClient {
         return foundCandidato;
     }
 
+    @Override
     public List<Bens> getCandidatoBens(String candidatoId) throws RestException {
         candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
 
         return request.getCandidatoBens(candidatoId);
     }
 
+    @Override
     public List<Doador> getCandidatoDoadores(String candidatoId, String anoEleitoral) throws RestException {
 
         candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
         return request.getCandidatoDoadores(candidatoId, anoEleitoral);
     }
 
+    @Override
     public List<Cargo> getCargos() throws RestException {
         return request.getCargos();
     }
 
+    @Override
     public List<Candidatura> getCandidatoCandidaturas(String candidatoId) throws RestException {
 
         candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
         return request.getCandidatoCandidaturas(candidatoId);
     }
 
+    @Override
     public List<Estatistica> getCandidatoEstatisticas(String candidatoId) throws RestException {
         candidatoId = ObjectUtils.defaultIfNull(candidatoId, "null");
 
         return request.getCandidatoEstatisticas(candidatoId);
     }
 
+    @Override
     public List<Excelencia> getExcelencias(String casa, String nome, String estadoId, String partidoId) throws RestException {
 
         return request.getExcelencias(casa, nome, estadoId, partidoId);
     }
 
+    @Override
     public Excelencia getExcelenciaById(String excelenciaId, boolean fetchSubResources) throws RestException {
 
         Excelencia excelencia = request.getExcelenciaById(excelenciaId);
@@ -147,6 +162,7 @@ public class TransparenciaClient {
         return excelencia;
     }
 
+    @Override
     public List<Bens> getExcelenciaBens(String excelenciaId) throws RestException {
         excelenciaId = ObjectUtils.defaultIfNull(excelenciaId, "null");
 
