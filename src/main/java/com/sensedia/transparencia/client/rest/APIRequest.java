@@ -249,7 +249,8 @@ public class APIRequest {
 
     private void checkException(ClientResponse response) throws RestException {
         if (response.getStatusInfo().getStatusCode() != 200) {
-            throw new RestException(response.getStatusInfo().getStatusCode(), response.getStatusInfo().getReasonPhrase());
+            String originalResponse = response.getEntity(String.class);
+            throw new RestException(response.getStatusInfo().getStatusCode(), response.getStatusInfo().getReasonPhrase(), originalResponse);
         }
     }
 

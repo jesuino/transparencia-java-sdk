@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,8 @@ public class APIRequestIT {
     private final String partido = "1";
     private final String nome = "";
     private final String cargo = "";
+
+    private final int max_limit = 20;
     private final int limit = 20;
     private final int offset = 0;
 
@@ -87,13 +90,28 @@ public class APIRequestIT {
         assertEquals(10, cargos.size());
     }
 
-    //TODO update limit
     @Test
     public void testGetCandidatos() throws RestException {
 
         List<Candidato> candidatos = request.getCandidatos(estado, partido, nome, cargo, limit, offset);
         assertNotNull(candidatos);
         assertEquals(limit, candidatos.size());
+    }
+
+    @Test
+    public void testGetCandidatosLimit() throws RestException {
+
+        List<Candidato> candidatos = request.getCandidatos(estado, partido, nome, cargo, 100000000, offset);
+        assertNotNull(candidatos);
+        assertEquals(max_limit, candidatos.size());
+    }
+
+    @Test
+    public void testGetCandidatosLimitNegativo() throws RestException {
+
+        List<Candidato> candidatos = request.getCandidatos(estado, partido, nome, cargo, -1, offset);
+        assertNotNull(candidatos);
+        assertEquals(max_limit, candidatos.size());
     }
 
     @Test
@@ -179,5 +197,19 @@ public class APIRequestIT {
 
     }
 
-    //TODO check for params and exceptions
+    //Testes de exceptions
+    @Test
+    public void testGetCandidatoByIdNotFound() {
+        try {
+            request.getCandidatoById("id-inexistente");
+            fail("Deveria ter lancado excecao");
+        } catch (RestException ex) {
+            assertEquals(404, ex.getCode());
+            assertEquals("Not Found", ex.getMessage());
+            assertNotNull(ex.getHttpMessage());
+
+        }
+
+    }
+
 }
