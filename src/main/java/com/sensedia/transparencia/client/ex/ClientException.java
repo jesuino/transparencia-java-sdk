@@ -11,4 +11,8 @@ package com.sensedia.transparencia.client.ex;
  */
 public class ClientException extends RuntimeException {
 
+    public ClientException(String message) {
+        super(message);
+    }
+
 }

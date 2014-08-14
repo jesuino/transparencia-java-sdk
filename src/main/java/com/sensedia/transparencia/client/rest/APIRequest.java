@@ -77,105 +77,174 @@ public class APIRequest {
             return response.getEntity(new GenericType<List<Estado>>() {
             });
         } catch (Exception ex) {
-            throw new ClientException();
+            throw new ClientException(ex.getMessage());
         }
     }
 
     public List<Partido> getPartidos() throws RestException {
-        List<Partido> response = webResource.path(PARTIDO_RESOURCE).type(MediaType.APPLICATION_JSON).header(TOKEN_HEADER, token)
-                .accept(MediaType.APPLICATION_JSON).get(new GenericType<List<Partido>>() {
-                });
+        ClientResponse response = webResource.path(PARTIDO_RESOURCE).type(MediaType.APPLICATION_JSON).header(TOKEN_HEADER, token)
+                .accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
-        return response;
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Partido>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
 
     }
 
     public List<Candidato> getCandidatos(String estado, String partido, String nome, String cargo, int limit, int offset)
             throws RestException {
 
-        List<Candidato> response = webResource.path(CANDIDATO_RESOURCE).queryParam("estado", estado)
+        ClientResponse response = webResource.path(CANDIDATO_RESOURCE).queryParam("estado", estado)
                 .queryParam("partido", partido).queryParam("nome", nome).queryParam("cargo", cargo)
                 .queryParam("_limit", String.valueOf(limit)).queryParam("_offset", String.valueOf(offset)).header(TOKEN_HEADER, token)
-                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(new GenericType<List<Candidato>>() {
-                });
+                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
-        return response;
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Candidato>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
     }
 
     // Busca por id, por padrao retorna um array pelo transparencia
     public Candidato getCandidatoById(String candidatoId) throws RestException {
 
-        Candidato response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).header(TOKEN_HEADER, token)
-                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(Candidato.class);
+        ClientResponse response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).header(TOKEN_HEADER, token)
+                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
-        return response;
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<Candidato>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
 
     }
 
     public List<Bens> getCandidatoBens(String candidatoId) throws RestException {
-        List<Bens> response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).path(BENS_RESOURCE).header(TOKEN_HEADER, token)
-                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(new GenericType<List<Bens>>() {
-                });
-        return response;
+        ClientResponse response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).path(BENS_RESOURCE).header(TOKEN_HEADER, token)
+                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Bens>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
     }
 
-    public List<Doador> getCandidatoDoadores(String candidatoId, String anoEleitoral) {
-        List<Doador> response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).path(DOADORES_RESOURCE)
+    public List<Doador> getCandidatoDoadores(String candidatoId, String anoEleitoral) throws RestException {
+        ClientResponse response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).path(DOADORES_RESOURCE)
                 .queryParam("anoEleitoral", anoEleitoral).header(TOKEN_HEADER, token).type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-                .get(new GenericType<List<Doador>>() {
-                });
+                .get(ClientResponse.class);
 
-        return response;
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Doador>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
 
     }
 
-    public List<Cargo> getCargos() {
-        List<Cargo> response = webResource.path(CARGO_RESOURCE).type(MediaType.APPLICATION_JSON).header(TOKEN_HEADER, token)
-                .accept(MediaType.APPLICATION_JSON).get(new GenericType<List<Cargo>>() {
-                });
+    public List<Cargo> getCargos() throws RestException {
+        ClientResponse response = webResource.path(CARGO_RESOURCE).type(MediaType.APPLICATION_JSON).header(TOKEN_HEADER, token)
+                .accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
-        return response;
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Cargo>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
     }
 
-    public List<Candidatura> getCandidatoCandidaturas(String candidatoId) {
-        List<Candidatura> response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).path(CANDIDATURAS_RESOURCE).header(TOKEN_HEADER, token)
-                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(new GenericType<List<Candidatura>>() {
-                });
+    public List<Candidatura> getCandidatoCandidaturas(String candidatoId) throws RestException {
+        ClientResponse response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).path(CANDIDATURAS_RESOURCE).header(TOKEN_HEADER, token)
+                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
-        return response;
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Candidatura>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
 
     }
 
     public List<Estatistica> getCandidatoEstatisticas(String candidatoId) throws RestException {
-        List<Estatistica> response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).path(ESTATISTICAS_RESOURCE).header(TOKEN_HEADER, token)
-                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(new GenericType<List<Estatistica>>() {
-                });
+        ClientResponse response = webResource.path(CANDIDATO_RESOURCE).path(candidatoId).path(ESTATISTICAS_RESOURCE).header(TOKEN_HEADER, token)
+                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
-        return response;
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Estatistica>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
     }
 
-    public List<Excelencia> getExcelencias(String casa, String nome, String estadoId, String partidoId) {
-        List<Excelencia> response = webResource.path(EXCELENCIAS_RESOURCE).queryParam("estado", estadoId)
+    public List<Excelencia> getExcelencias(String casa, String nome, String estadoId, String partidoId) throws RestException {
+        ClientResponse response = webResource.path(EXCELENCIAS_RESOURCE).queryParam("estado", estadoId)
                 .queryParam("partido", partidoId).queryParam("nome", nome).queryParam("casa", casa).header(TOKEN_HEADER, token)
-                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(new GenericType<List<Excelencia>>() {
-                });
-        return response;
+                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Excelencia>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
 
     }
 
     public Excelencia getExcelenciaById(String excelenciaId) throws RestException {
 
-        Excelencia response = webResource.path(EXCELENCIAS_RESOURCE).path(excelenciaId).header(TOKEN_HEADER, token)
-                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(Excelencia.class);
-        return response;
+        ClientResponse response = webResource.path(EXCELENCIAS_RESOURCE).path(excelenciaId).header(TOKEN_HEADER, token)
+                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+
+        checkException(response);
+        try {
+            return response.getEntity(new GenericType<Excelencia>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
 
     }
 
     public List<Bens> getExcelenciaBens(String excelenciaId) throws RestException {
-        List<Bens> response = webResource.path(EXCELENCIAS_RESOURCE).path(excelenciaId).path(BENS_RESOURCE).header(TOKEN_HEADER, token)
-                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(new GenericType<List<Bens>>() {
-                });
-        return response;
+        ClientResponse response = webResource.path(EXCELENCIAS_RESOURCE).path(excelenciaId).path(BENS_RESOURCE).header(TOKEN_HEADER, token)
+                .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        checkException(response);
+
+        try {
+            return response.getEntity(new GenericType<List<Bens>>() {
+            });
+        } catch (Exception ex) {
+            throw new ClientException(ex.getMessage());
+        }
     }
 
     private void checkException(ClientResponse response) throws RestException {
