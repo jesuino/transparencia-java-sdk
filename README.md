@@ -12,9 +12,20 @@ Kit de desenvolvimento Java para as APIs do Transparencia Brasil
   Transparencia client = new TransparenciaClient("MEU-APP-TOKEN");
   
   //Busca candidato por ID, 'true' popula automaticamente os campos 'bens', 'candidaturas', 'doadores' e 'estatisticas'
-  Candidatos candidato = client.getCandidatoById("123456", true);
+  Candidato candidato = client.getCandidatoById("123456", true);
   
-  List<Partidos> partidos = client.getPartidos();
+  List<Partido> partidos = client.getPartidos();
   
   ...
+```
+##Exceptions:
+```
+	try {
+         Candidato candidato = client.getCandidatoById("123456", true);
+    } catch (RestException ex) {
+        System.err.println("Error code: " + ex.getCode());
+        System.err.println("Http message: " + ex.getHttpMessage());
+        System.err.println("Original error message: " + ex.getMessage());
+    }
+
 ```
