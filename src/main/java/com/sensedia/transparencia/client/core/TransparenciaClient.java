@@ -24,16 +24,6 @@ public class TransparenciaClient {
     private static final int DEFAULT_LIMIT = 20;
     private static final int DEFAULT_OFFSET = 0;
 
-    public static enum CANDIDATO_EAGER_FETCH {
-
-        BENS, DOADORES, CANDIDATURAS, ESTATISTICAS
-    }
-
-    public static enum EXCELENCIA_EAGER_FETCH {
-
-        BENS
-    }
-
     private final APIRequest request;
 
     public TransparenciaClient(String token) {
@@ -48,8 +38,25 @@ public class TransparenciaClient {
         return request.getPartidos();
     }
 
+    public List<Candidato> getCandidatos(String estado, String partido, String nome, String cargo, int limit, int offset)
+            throws RestException {
+
+        estado = ObjectUtils.defaultIfNull(estado, "");
+        partido = ObjectUtils.defaultIfNull(partido, "");
+        nome = ObjectUtils.defaultIfNull(nome, "");
+        cargo = ObjectUtils.defaultIfNull(cargo, "");
+
+        return request.getCandidatos(estado, partido, nome, cargo, limit, offset);
+
+    }
+
     public List<Candidato> getCandidatos(String estado, String partido, String nome, String cargo)
             throws RestException {
+
+        estado = ObjectUtils.defaultIfNull(estado, "");
+        partido = ObjectUtils.defaultIfNull(partido, "");
+        nome = ObjectUtils.defaultIfNull(nome, "");
+        cargo = ObjectUtils.defaultIfNull(cargo, "");
 
         return request.getCandidatos(estado, partido, nome, cargo, DEFAULT_LIMIT, DEFAULT_OFFSET);
 
@@ -58,12 +65,18 @@ public class TransparenciaClient {
     public List<Candidato> getCandidatosByPartido(String estado, String partido)
             throws RestException {
 
+        estado = ObjectUtils.defaultIfNull(estado, "");
+        partido = ObjectUtils.defaultIfNull(partido, "");
+
         return request.getCandidatos(estado, partido, "", "", DEFAULT_LIMIT, DEFAULT_OFFSET);
 
     }
 
     public List<Candidato> getCandidatosByCargo(String estado, String cargo)
             throws RestException {
+
+        estado = ObjectUtils.defaultIfNull(estado, "");
+        cargo = ObjectUtils.defaultIfNull(cargo, "");
 
         return request.getCandidatos(estado, "", "", cargo, DEFAULT_LIMIT, DEFAULT_OFFSET);
 
@@ -72,14 +85,10 @@ public class TransparenciaClient {
     public List<Candidato> getCandidatosByNome(String estado, String nome)
             throws RestException {
 
+        estado = ObjectUtils.defaultIfNull(estado, "");
+        nome = ObjectUtils.defaultIfNull(nome, "");
+
         return request.getCandidatos(estado, "", nome, "", DEFAULT_LIMIT, DEFAULT_OFFSET);
-
-    }
-
-    public List<Candidato> getCandidatos(String estado, String partido, String nome, String cargo, int limit, int offset, CANDIDATO_EAGER_FETCH... fetch)
-            throws RestException {
-
-        return request.getCandidatos(estado, partido, nome, cargo, limit, offset);
 
     }
 
@@ -129,8 +138,13 @@ public class TransparenciaClient {
         return request.getExcelencias(casa, nome, estadoId, partidoId);
     }
 
-    public Excelencia getExcelenciaById(String excelenciaId) throws RestException {
-        return request.getExcelenciaById(excelenciaId);
+    public Excelencia getExcelenciaById(String excelenciaId, boolean fetchSubResources) throws RestException {
+
+        Excelencia excelencia = request.getExcelenciaById(excelenciaId);
+        if (fetchSubResources) {
+            excelencia.setBens(request.getExcelenciaBens(excelenciaId));
+        }
+        return excelencia;
     }
 
     public List<Bens> getExcelenciaBens(String excelenciaId) throws RestException {

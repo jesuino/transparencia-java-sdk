@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  *
- * @author cit
+ * @author Josue
  */
 public class Estado {
 
