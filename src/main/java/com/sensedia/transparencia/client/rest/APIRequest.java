@@ -68,7 +68,7 @@ public class APIRequest {
 
     public List<Estado> getEstados() throws RestException {
 
-        ClientResponse response = webResource.path(ESTADO_RESOURCE).type(MediaType.APPLICATION_JSON)
+        ClientResponse response = webResource.path(ESTADO_RESOURCE).header(TOKEN_HEADER, token).type(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
         checkException(response);
@@ -165,7 +165,7 @@ public class APIRequest {
 
     public Excelencia getExcelenciaById(String excelenciaId) throws RestException {
 
-        Excelencia response = webResource.path(EXCELENCIAS_RESOURCE).path(excelenciaId)
+        Excelencia response = webResource.path(EXCELENCIAS_RESOURCE).path(excelenciaId).header(TOKEN_HEADER, token)
                 .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get(Excelencia.class);
         return response;
 
