@@ -6,7 +6,20 @@ Kit de desenvolvimento Java para as APIs do Transparencia Brasil
 ===========
 
 ##Instalação
-Apenas baixe `transparencia-java-sdk-1.0.jar` e adicione ao classpath do projeto
+Apenas baixe `transparencia-java-sdk-1.0.jar` e adicione ao classpath do projeto.
+
+####Maven
+Baixe o codigo e execute
+`mvn install`
+
+Adicione ao seu `pom.xml`:
+```
+    <dependency>
+        <groupId>com.sensedia</groupId>
+        <artifactId>transparencia-java-sdk</artifactId>
+        <version>1.0</version>
+    </dependency>
+```
 
 > Contribuidores para disponibilizar no Maven Central são bem vindos !
 
