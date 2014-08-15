@@ -6,7 +6,7 @@ Kit de desenvolvimento Java para as APIs do Transparencia Brasil
 ===========
 
 ##Instalação
-Baixa `transparencia-java-sdk-1.0.jar` e adicione ao classpath do projeto
+Apenas baixe `transparencia-java-sdk-1.0.jar` e adicione ao classpath do projeto
 
 > Contribuidores para disponibilizar no Maven Central são bem vindos !
 
